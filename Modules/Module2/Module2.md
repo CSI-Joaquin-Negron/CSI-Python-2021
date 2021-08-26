@@ -84,6 +84,7 @@ Python should have been installed and added to PATH. To verify this run: `python
  
 >Python 3.9.6
 
+
 <br>
 
 ## Open the Python Console
@@ -131,23 +132,23 @@ Typing `python` *(or `python3`)* into the terminal will enter the Python console
 What is a benefit of using Markdown?
 https://www.markdownguide.org/getting-started/
 
- - Answer:
+ - Answer: Markdown can be used for everything, is portable, it is platform independent, future proof, and everywhere.
 
 What does "cd" stand for?
 
- - Answer:
+ - Answer: cd means change directory.
 
 Did you get stuck at any point or become confused with your console? (yes/no) If so, what happened? How did you solve it?
 
- - Answer:
+ - Answer: I havent been stuck on any part of the console.
 
 Did you consider searching google for other commands to run? What did you try? 
 
- - Answer:
+ - Answer: I was taught previously that using google for programming was a very common occurance so i tend to use google if im lost.
 
 What would you like to program? 
 
- - Answer:
+ - Answer: I usually program rasberry Pi but i used to use Jupyter notebooks.
 
 Type down any class notes below this sentence:
 
