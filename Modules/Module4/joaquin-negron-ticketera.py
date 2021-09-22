@@ -1,0 +1,7 @@
+print('Welcome to the Day of Colors 2021')
+print('The cost of each ticket are as listed: General entry is 30$ per person and Vip seating is 60$ per person')
+genSeat = int(input('How many General seating ticket will you buy?: '))
+vipSeat = int(input('How many VIP seating tickest will you buy?: '))
+print('Your total cost of General seating is:', genSeat * 30)
+print('Your total cost of VIP seating is:', vipSeat * 60)
+print('The total cost of your tickets is: ', genSeat * 30 + vipSeat * 60)
