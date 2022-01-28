@@ -2,11 +2,11 @@ import random
 word_list = ['bucana', 'jacaguas', 'guajataka', 'fajardo', 'loco', 'bayagan', 'nigua', 'pastillo', 'cerrillos', 'daguao']
 
 def get_word(word_list):
-    word = random.choice
+    word = random.choice(word_list)
     return word.upper()
 
 def play(word):
-    word_completion = '_' + len(word)
+    word_completion = '_ ' * len(word)
     guessed = False
     guessed_letters = []
     guessed_words = []
@@ -28,9 +28,33 @@ def play(word):
             else:
                 print('Nice!',guess, 'Light Work')
                 guessed_letters.append(guess)
+                word_as_list = list(word_completion)
+                indices = [i for i, letter in enumerate(word) if letter == guess]
+                for index in indices:
+                    word_as_list[index] = guess
+                word_completion = "".join(word_as_list)
+                if "_" not in word_completion:
+                    guessed = True
+        elif len(guess) == len(word) and guess.isalpha():
+            if guess in guessed_words:
+                print("you already tried", guess, "!")
+            elif guess != word:
+                print(guess, 'is not the word')
+                tries -= 1
+                guessed_words.append(guess)
+            else:
+                guessed  = True
+                word_completion = word
+        else:
+            print('invalid input')
+        print(display_hangman(tries))
+        print(word_completion)
+        print("\n")
 
-
-
+    if guessed:
+        ('Good hustle, you finished the word.')
+    else:
+        ("HE DEAD NOW GOOD ONE! The word was" + word + ', try again maybe?')
 
 def display_hangman(tries):
     stages = ["""
@@ -91,3 +115,13 @@ def display_hangman(tries):
                     |    
                     """, 
     ]
+    return stages[tries]
+def main():
+    word = get_word(word_list)
+    play(word)
+    while input('again Y/N').upper() == "Y":
+        word = get_word(word_list)
+        play(word)
+
+if __name__ == '__main__':
+    main()
