@@ -1,6 +1,7 @@
 # create the screen
 import pygame as pg
 import time
+import random
 pg.init()
 
 yellow = (179, 178, 70)# score
@@ -10,24 +11,29 @@ green = (0, 80, 34)# background
 light_green = (0, 232, 101)# game over
 
 
-dis_width = 600
-dis_height = 500
-dis = pg.display.set_mode((dis_width,dis_height)) #define screen resolution
-# pg.display.update
+dis_width = 800
+dis_height = 700
 
-pg.display.set_caption('Snake Game By JN')
-game_over = False
+dis=pg.display.set_mode((dis_width,dis_height))
+pg.display.set_caption("Snake game by MF")
+game_over=False
 
+ 
 clock = pg.time.Clock()
-snake_speed = 15
-
+snake_speed = 20
 snake_block = 10
 
-font_style = pg.font.SysFont(None,50)
+ 
 
-def message(msg,color):
+font_style = pg.font.SysFont(None, 25)
+
+ 
+def my_snake(snake_block, snake_list):
+    for x in snake_list:
+        pg.draw.rect(dis, purple, [x[0], x[1], snake_block, snake_block])
+def message(msg, color):
     mesg = font_style.render(msg, True, color)
-    dis.blit(mesg, [dis_width/2, dis_height/2])
+    dis.blit(mesg, [dis_width/2.5, dis_height/2])
 
 def gameLoop():
     game_over = False
@@ -35,15 +41,30 @@ def gameLoop():
 
     x1 = dis_width/2
     y1 = dis_height/2
-    
+
     x1_change = 0
     y1_change = 0
+
+    snake_List = []
+    length_of_snake = 1
+
+    foodx = round(random.ranrange(0, dis_width - snake_block) / 10) * 10
+    foody = round(random.ranrange(0, dis_height - snake_block) / 10) * 10
+
 while not game_over:
     while game_close == True:
         dis.fill(green)
-         
+        message("YOU DIED. Press Q to quit and P to play again.", red)
+        pg.display.update()
 
-while not game_over:
+        for event in pg.event.get():
+            if event.type==pg.KEYDOWN:
+                if event.key == pg.K_q:
+                    game_over = True
+                    game_close = False
+                if event.key == pg.K_q:
+                    gameLoop()
+
     for event in pg.event.get():
         if event.type == pg.QUIT:
             game_over == True
@@ -66,12 +87,29 @@ while not game_over:
     x1 += x1_change
     y1 += y1_change
     dis.fill(green)
-    pg.draw.rect(dis, purple, [x1, y1, snake_block, snake_block])
+    # pg.draw.rect(dis, purple, [x1, y1, snake_block, snake_block])
+    pg.draw.rect(dis, red,[foodx, foody, snake_block, snake_block])
+    
+    snake_head = []
+    snake_head.append(x1)
+    snake_head.append(y1)
+    snake_List.append(snake_head)
+    if len(snake_List) > length_of_snake:
+        del snake_List
+    
+    for x in snake_List[:, -1]:
+        if x  == snake_head:
+            game_close == True
+    
+    my_snake(snake_block, snake_List)
     pg.display.update()
-    clock.tick(30)
-message("GAME OVER", red)
-pg.display.update
-time.sleep(5)
-pg.quit()
+    if x1  == foodx and y1 == foody:
+        foodx = round(random.randrange(0, dis_width - snake_block) / 10) * 10
+        foody = round(random.randrange(0, dis_height - snake_block) / 10) * 10
+        length_of_snake +=1
+
+    clock.tick(snake_speed)
 pg.quit()
 quit()
+
+ 
